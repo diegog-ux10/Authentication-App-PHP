@@ -2,8 +2,11 @@
 
 namespace controllers;
 
+require_once(__DIR__ . "/../models/RegisterModel.php");
+
 use core\Controller;
 use core\Request;
+use models\RegisterModel;
 
 class AuthController extends Controller
 {
@@ -18,28 +21,24 @@ class AuthController extends Controller
     
     public function register(Request $request)
     {
+        $registerModel = new RegisterModel();
+
         if($request->isPost()) {
-            return "handle sumitted data";
+            $registerModel->loadData($request->getBody());
+            echo '<pre>';
+            var_dump($registerModel);
+            echo '</pre>';
+            if($registerModel->validate() && $registerModel->register()) {
+                return "sucess";
+            }
+            $this->setLayout("auth");
+            return $this->render("register", [
+                "model" => $registerModel
+            ]);
         }
-
-        $params = [
-            "name" => "Diego"
-        ];
         $this->setLayout("auth");
-        return $this->render("register", $params);
-    }
-
-    public function handleLogin()
-    {
-        return "Sumimited login";
-    }
-
-    public function handleRegister(Request $request)
-    {
-        $body = $request->getBody();
-        echo '<pre>';
-        var_dump($body);
-        echo '</pre>';
-        return "Sumimited Register";
+        return $this->render("register", [
+            "model" => $registerModel
+        ]);
     }
 }
