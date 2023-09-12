@@ -2,13 +2,10 @@
 
 namespace controllers;
 
-require_once(__DIR__ . "/../core/Controller.php");
-
-use core\Application;
 use core\Controller;
 use core\Request;
 
-class SiteController extends Controller
+class AuthController extends Controller
 {
     public function login()
     {
@@ -19,8 +16,12 @@ class SiteController extends Controller
         return $this->render("login", $params);
     }
     
-    public function register()
+    public function register(Request $request)
     {
+        if($request->isPost()) {
+            return "handle sumitted data";
+        }
+        
         $params = [
             "name" => "Diego"
         ];
