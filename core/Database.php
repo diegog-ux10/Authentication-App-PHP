@@ -15,7 +15,29 @@ class Database
     public function applyMigrations() 
     {
         $this->createMigrationsTable();
-        $this->getAppliedMigrations();
+        $appliedMigrations = $this->getAppliedMigrations();
+
+        $newMigrations = [];
+        $files = scandir(dirname(__DIR__).'/migrations');
+        $toApplyMigrations = array_diff($files, $appliedMigrations);
+        foreach($toApplyMigrations as $migration) {
+            if($migration === "." || $migration === "..") {
+                continue;
+            }
+            require_once dirname(__DIR__) . "/migrations/$migration";
+            $className = pathinfo($migration, PATHINFO_FILENAME);
+            var_dump($className);
+            $instance = new $className();
+            echo "Applying Migration $migration".PHP_EOL;
+            $instance->up();
+            echo "Applied Migration $migration".PHP_EOL;
+            $newMigrations[] = $migration;
+            if(!empty($newMigrations)) {
+                $this->saveMigrations($newMigrations);
+            } else {
+                echo "All migrations updated";
+            }
+        }
     }
 
     public function createMigrationsTable() 
@@ -29,9 +51,19 @@ class Database
 
     public function getAppliedMigrations() 
     {
-        $statement = $this->pdo->prepare("SELECT migrations FROM migrations");
+        $statement = $this->pdo->prepare("SELECT migration FROM migrations");
         $statement->execute();
 
         return $statement->fetchAll(\PDO::FETCH_COLUMN);
+    }
+
+    public function saveMigrations(array $migrations) {
+        $str= implode(",", array_map(fn($m) => "('$m')", $migrations));
+        $statement = $this->pdo->prepare("INSERT INTO migrations (migration) VALUES $str");
+        $statement->execute();
+    }
+
+    public function  log($message) {
+        echo '['.date('Y-m-d H:i:s'). '] - '.$message.PHP_EOL; 
     }
 }
