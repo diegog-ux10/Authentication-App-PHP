@@ -1,14 +1,14 @@
 <?php
 
-namespace app\core;
+namespace core;
 
 require_once(__DIR__ . "/Request.php");
 require_once(__DIR__ . "/Router.php");
 require_once(__DIR__ . "/Response.php");
 
-use app\core\Request;
-use app\core\Router;
-use app\core\Response;
+use core\Request;
+use core\Router;
+use core\Response;
 
 class Application
 {
