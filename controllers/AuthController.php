@@ -12,7 +12,7 @@ class AuthController extends Controller
         $params = [
             "name" => "Diego"
         ];
-
+        $this->setLayout("auth");
         return $this->render("login", $params);
     }
     
@@ -21,11 +21,11 @@ class AuthController extends Controller
         if($request->isPost()) {
             return "handle sumitted data";
         }
-        
+
         $params = [
             "name" => "Diego"
         ];
-
+        $this->setLayout("auth");
         return $this->render("register", $params);
     }
 
