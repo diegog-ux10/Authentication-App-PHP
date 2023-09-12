@@ -1,11 +1,8 @@
 <?php
 
-require_once($_SERVER["DOCUMENT_ROOT"] . "/core/Application.php");
-require_once($_SERVER["DOCUMENT_ROOT"] . "/controllers/SiteController.php");
-require_once($_SERVER["DOCUMENT_ROOT"] . "/controllers/AuthController.php");
+require_once "autoload.php";
 
 use controllers\AuthController;
-use controllers\SiteController;
 use core\Application;
 
 $app = new Application($_SERVER["DOCUMENT_ROOT"]);

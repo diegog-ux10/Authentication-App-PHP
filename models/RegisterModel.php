@@ -2,15 +2,13 @@
 
 namespace models;
 
-require_once(__DIR__ . "/../core/Model.php");
-
 use core\Model;
 
 class RegisterModel extends Model
 {
-    public string $email;
-    public string $password;
-    public string $passwordConfirm;
+    public string $email = '';
+    public string $password = '';
+    public string $passwordConfirm = '';
 
     public function register() 
     {

@@ -2,13 +2,10 @@
 
 namespace core;
 
-require_once(__DIR__ . "/Request.php");
-require_once(__DIR__ . "/Router.php");
-require_once(__DIR__ . "/Response.php");
-
 use core\Request;
 use core\Router;
 use core\Response;
+use core\Database;
 
 class Application
 {
@@ -16,6 +13,7 @@ class Application
     public Router $router;
     public Request $request;
     public Response $response;
+    public Database $db;
     public static Application $app;
     public Controller $controller;
     public function __construct($rootPath)
@@ -24,7 +22,9 @@ class Application
         self::$app = $this;
         $this->request = new Request();
         $this->response = new Response();
+        $this->controller = new Controller();
         $this->router = new Router($this->request, $this->response);
+        $this->db = new Database();
     }
 
     public function run()

@@ -45,11 +45,7 @@ abstract class Model
                     $this->addError($attribute, self::RULE_MAX, $rule);
                 }
                 if($ruleName === self::RULE_MATCH && $value !== $this->{"password"}) {
-                    
                     $this->addError($attribute, self::RULE_MATCH, $rule);
-                    echo '<pre>';
-                    var_dump($rule);
-                    echo '</pre>';
                 }
             }
         }
@@ -75,5 +71,13 @@ abstract class Model
                 self::RULE_MAX => "Max length of this field must be {max}",
                 self::RULE_MATCH => "This field must be the same as {match}",
             ];
+    }
+
+    public function hasError($attribute) {
+        return $this->errors[$attribute] ?? false;
+    }
+
+    public function getFirstError($attribute) {
+        return $this->errors[$attribute][0] ?? "";
     }
 }

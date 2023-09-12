@@ -1,8 +1,7 @@
 <?php
 
-namespace controllers;
 
-require_once(__DIR__ . "/../models/RegisterModel.php");
+namespace controllers;
 
 use core\Controller;
 use core\Request;
