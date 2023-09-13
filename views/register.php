@@ -1,3 +1,7 @@
+<?php foreach($model as $key => $value) {
+    $$key = $value;
+} ?>
+
 <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
     <div class="border-solid border-2 border-#DBDBDB p-16 max-w-lg mx-auto rounded-3xl">
         <form action="" method="post" novalidate>
@@ -11,7 +15,7 @@
             <div class="mt-4 sm:mx-auto sm:w-full sm:max-w-sm">
                 <div>
                     <div class="mt-2">
-                        <input id="email" name="email" type="email" autocomplete="email" class="w-full rounded border border-gray-300 bg-inherit p-3 shadow shadow-gray-100 mt-2 appearance-none outline-none text-neutral-800 <?php echo $model->hasError('email') ? 'border-red-500' : '' ?>">
+                        <input id="email" name="email" type="email" value="<?php echo $email ?>"  class="w-full rounded border border-gray-300 bg-inherit p-3 shadow shadow-gray-100 mt-2 appearance-none outline-none text-neutral-800 <?php echo $model->hasError('email') ? 'border-red-500' : '' ?>">
                     </div>
                     <span class="mt-2 text-sm text-red-500">
                         <?php echo $model->getFirstError("email"); ?>
@@ -20,7 +24,7 @@
 
                 <div>
                     <div class="mt-2">
-                        <input id="password" name="password" type="password" autocomplete="current-password" class="w-full rounded border border-gray-300 bg-inherit p-3 shadow shadow-gray-100 mt-2 appearance-none outline-none text-neutral-800 <?php echo $model->hasError('password') ? 'border-red-500' : '' ?>">
+                        <input id="password" name="password" value="<?php echo $password ?>" type="password" class="w-full rounded border border-gray-300 bg-inherit p-3 shadow shadow-gray-100 mt-2 appearance-none outline-none text-neutral-800 <?php echo $model->hasError('password') ? 'border-red-500' : '' ?>">
                     </div>
                     <span class="mt-2 text-sm text-red-500">
                         <?php echo $model->getFirstError("password"); ?>
@@ -29,7 +33,7 @@
                 
                 <div>
                     <div class="mt-2">
-                        <input id="passwordConfirm" name="passwordConfirm" type="password" autocomplete="current-passwordConfirm" class="w-full rounded border border-gray-300 bg-inherit p-3 shadow shadow-gray-100 mt-2 appearance-none outline-none text-neutral-800 <?php echo $model->hasError('passwordConfirm') ? 'border-red-500' : '' ?>">
+                        <input id="passwordConfirm" name="passwordConfirm" value="<?php echo $passwordConfirm ?>" type="password" class="w-full rounded border border-gray-300 bg-inherit p-3 shadow shadow-gray-100 mt-2 appearance-none outline-none text-neutral-800 <?php echo $model->hasError('passwordConfirm') ? 'border-red-500' : '' ?>">
                     </div>
                     <span class="mt-2 text-sm text-red-500">
                         <?php echo $model->getFirstError("passwordConfirm"); ?>
