@@ -2,9 +2,9 @@
 
 namespace models;
 
-use core\DbModel;
+use core\UserModel;
 
-class User extends DbModel
+class User extends UserModel
 {
 
     const STATUS_INACTIVE = 0;
@@ -46,5 +46,10 @@ class User extends DbModel
 
     public function attributes(): array {
         return ["email", "password", "name", "bio", "phone", "photo", "status"];
+    }
+
+    public function getDisplayName(): string
+    {
+        return $this->name;
     }
 }
