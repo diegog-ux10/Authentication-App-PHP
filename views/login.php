@@ -1,13 +1,15 @@
 <?php 
 
+$this->title = "Login";
+
 /**@var $model \models\User */
 
-?>
-
-
-<?php foreach($model as $key => $value) {
+ foreach($model as $key => $value) {
     $$key = $value;
-} ?>
+} 
+
+
+?>
 
 <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
     <div class="border-solid border-2 border-#DBDBDB p-16 max-w-lg mx-auto rounded-3xl">
