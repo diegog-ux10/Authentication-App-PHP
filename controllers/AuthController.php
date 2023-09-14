@@ -24,6 +24,7 @@ class AuthController extends Controller
         if ($request->isPost()) {
             $loginForm->loadData($request->getBody());
             if ($loginForm->validate() && $loginForm->login()) {
+                echo "entre 3";
                 $response->redirect("/");
             }
         }
@@ -52,12 +53,6 @@ class AuthController extends Controller
         return $this->render("register", [
             "model" => $user
         ]);
-    }
-
-    public function profile()
-    {
-        $this->setLayout("main");
-        return $this->render("profile");
     }
 
     public function logout(Request $request, Response $response)

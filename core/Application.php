@@ -37,7 +37,7 @@ class Application
         $this->view = new View();
         $this->db = new Database($config["db"]);
         $primaryValue = $this->session->get("user");
-        if($primaryValue) {
+        if ($primaryValue) {
             $primaryKey = $this->userClass::primaryKey();
             $this->userClass::findOne([$primaryKey => $primaryValue]);
         }
@@ -67,20 +67,14 @@ class Application
 
     public function login(DbModel $user)
     {
-        var_dump($user);
-        echo "<br>";
         $this->user = $user;
-        echo "<br>";
-        var_dump($this->user);
+
         $primaryKey = $user->primaryKey();
         $primaryValue = $user->{$primaryKey};
-        echo "<br>";
-        echo "<br>";
-        var_dump($primaryKey);
-        echo "<br>";
-        echo "<br>";
+
         $this->session->set("user", $primaryValue);
-        var_dump(self::$app->user);
+    var_dump($_SESSION);
+
         return true;
     }
 

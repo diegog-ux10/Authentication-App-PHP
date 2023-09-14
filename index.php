@@ -4,11 +4,12 @@ require_once "autoload.php";
 require_once __DIR__ . "/config/config.php";
 
 use controllers\AuthController;
+use controllers\SiteController;
 use core\Application;
 
 $app = new Application($_SERVER["DOCUMENT_ROOT"], $config);
 
-$app->router->get("/", [AuthController::class, "profile"]);
+$app->router->get("/", [SiteController::class, "profile"]);
 
 $app->router->get("/register", [AuthController::class, "register"]);
 $app->router->post("/register", [AuthController::class, "register"]);
