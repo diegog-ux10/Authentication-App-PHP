@@ -26,7 +26,6 @@ class Database
             }
             require_once dirname(__DIR__) . "/migrations/$migration";
             $className = pathinfo($migration, PATHINFO_FILENAME);
-            var_dump($className);
             $instance = new $className();
             echo "Applying Migration $migration".PHP_EOL;
             $instance->up();
