@@ -12,6 +12,7 @@ class Application
 {
     public static string $ROOT_DIR;
 
+    public string $layout = "main";
     public string $userClass;
     public Router $router;
     public Request $request;
@@ -19,7 +20,6 @@ class Application
     public Session $session;
     public Database $db;
     public ?DbModel $user = null;
-
     public static Application $app;
     public Controller $controller;
     public function __construct($rootPath, array $config)
@@ -42,7 +42,14 @@ class Application
 
     public function run()
     {
-        echo $this->router->resolve();
+        try {
+            echo $this->router->resolve();
+        } catch (\Exception $e) {
+            $this->response->setStatusCode($e->getCode());
+            echo $this->router->renderView('_error', [
+                "exception" => $e
+            ]);
+        }
     }
 
     public function getController(): Controller
@@ -57,10 +64,20 @@ class Application
 
     public function login(DbModel $user)
     {
+        var_dump($user);
+        echo "<br>";
         $this->user = $user;
+        echo "<br>";
+        var_dump($this->user);
         $primaryKey = $user->primaryKey();
         $primaryValue = $user->{$primaryKey};
+        echo "<br>";
+        echo "<br>";
+        var_dump($primaryKey);
+        echo "<br>";
+        echo "<br>";
         $this->session->set("user", $primaryValue);
+        var_dump(self::$app->user);
         return true;
     }
 
@@ -72,6 +89,6 @@ class Application
 
     public static function isGuest()
     {
-        return !self::$app->user;
+        return self::$app->user ? false : true;
     }
 }

@@ -5,6 +5,7 @@ namespace controllers;
 
 use core\Application;
 use core\Controller;
+use core\middlewares\AuthMiddlewares;
 use core\Request;
 use core\Response;
 use models\Login;
@@ -12,12 +13,17 @@ use models\User;
 
 class AuthController extends Controller
 {
+
+    public function __construct() {
+        $this->registerMiddleware(new AuthMiddlewares(["profile"]));
+    }
+
     public function login(Request $request, Response $response)
     {
         $loginForm = new Login();
-        if($request->isPost()) {
+        if ($request->isPost()) {
             $loginForm->loadData($request->getBody());
-            if($loginForm->validate() && $loginForm->login()) {
+            if ($loginForm->validate() && $loginForm->login()) {
                 $response->redirect("/");
             }
         }
@@ -26,17 +32,16 @@ class AuthController extends Controller
             'model' => $loginForm
         ]);
     }
-    
+
     public function register(Request $request)
     {
         $user = new User();
 
-        if($request->isPost()) {
+        if ($request->isPost()) {
             $user->loadData($request->getBody());
-            if($user->validate() && $user->save()) {
+            if ($user->validate() && $user->save()) {
                 Application::$app->session->setFlash("success", "Register successful");
                 Application::$app->response->redirect("/");
-                
             }
             $this->setLayout("auth");
             return $this->render("register", [
@@ -49,7 +54,13 @@ class AuthController extends Controller
         ]);
     }
 
-    public function logout(Request $request, Response $response) 
+    public function profile()
+    {
+        $this->setLayout("main");
+        return $this->render("profile");
+    }
+
+    public function logout(Request $request, Response $response)
     {
         Application::$app->logout();
         $response->redirect("/");
