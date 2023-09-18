@@ -43,7 +43,10 @@ class AuthController extends Controller
             $user->loadData($request->getBody());
             if ($user->validate() && $user->save()) {
                 Application::$app->session->setFlash("success", "Register successful");
-                Application::$app->response->redirect("/login");
+                $userData = User::findOne(["email" => $user->email]);
+                session_start();
+                $_SESSION["user"] = $userData->id;
+                Application::$app->response->redirect("/");
             }
             $this->setLayout("auth");
             return $this->render("register", [
