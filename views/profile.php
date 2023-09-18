@@ -12,7 +12,14 @@ foreach ($user as $key => $value) {
         </div>
         <span id="dropdown-menu-toggle">
             <div class="flex items-center cursor-pointer gap-4">
-                <img src="./assets/images/blank-profile-picture-973460_1280.webp" alt="" height="32" width="32" class="rounded" />
+                <?php
+                if ($photo) {
+                    $dataImg = base64_encode(stripslashes($photo));
+                    echo "<img src='data:image/jpg;base64,$dataImg' alt='' height='32' width='32' class='rounded'>";
+                } else {
+                    echo "<img src='./../assets/images/blank-profile-picture-973460_1280.webp' alt='' height='32' width='32' class='rounded'>";
+                }
+                ?>
                 <span><?php echo  $name ? $name : "John" ?></span>
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
                     <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
@@ -64,17 +71,19 @@ foreach ($user as $key => $value) {
             </div>
 
             <div class="flex items-center px-16 py-8 border border-slate-300">
-                <div class="mr-20">
+                <div class="basis-1/4 text-left">
                     <h4 class="text-slate-300">PHOTO</h4>
                 </div>
-                <?php
-                if (true) {
-                    $dataImg = base64_encode(stripslashes($photo));
-                    echo "<img src='data:image/jpg;base64,$dataImg' alt='' height='72' width='72' class='rounded'>";
-                } else {
-                    echo "<img src='./../assets/images/blank-profile-picture-973460_1280.webp' alt='' height='72' width='72' class='rounded'>";
-                }
-                ?>
+                <div class="basis-1/2 text-left">
+                    <?php
+                    if (true) {
+                        $dataImg = base64_encode(stripslashes($photo));
+                        echo "<img src='data:image/jpg;base64,$dataImg' alt='' height='72' width='72' class='rounded object-cover h-full'>";
+                    } else {
+                        echo "<img src='./../assets/images/blank-profile-picture-973460_1280.webp' alt='' height='72' width='72' class='rounded'>";
+                    }
+                    ?>
+                </div>
             </div>
 
             <div class="flex items-center px-16 py-8 border border-slate-300 flex-row">

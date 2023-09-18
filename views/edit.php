@@ -1,3 +1,11 @@
+<?php
+
+foreach ($data as $key => $value) {
+    $$key = $value;
+}
+
+?>
+
 <header class="w-screen px-24 py-12">
     <nav class="w-full flex flex-row justify-between">
         <div>
@@ -5,8 +13,15 @@
         </div>
         <span id="dropdown-menu-toggle">
             <div class="flex items-center cursor-pointer gap-4">
-                <img src="./assets/images/blank-profile-picture-973460_1280.webp" alt="" height="32" width="32" class="rounded" />
-                <span>Nombre de usuario</span>
+                <?php
+                if ($photo) {
+                    $dataImg = base64_encode(stripslashes($photo));
+                    echo "<img src='data:image/jpg;base64,$dataImg' alt='' height='32' width='32' class='rounded'>";
+                } else {
+                    echo "<img src='./../assets/images/blank-profile-picture-973460_1280.webp' alt='' height='32' width='32' class='rounded'>";
+                }
+                ?>
+                <span><?php echo  $name ? $name : "John" ?></span>
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
                     <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
                 </svg>
@@ -14,7 +29,6 @@
         </span>
     </nav>
 </header>
-
 <main class="w-screen flex justify-center mt-8 mb-16 relative">
 
     <div id="dropdown-menu" class="hide-toggle absolute right-24 bg-white flex flex-col p-4 drop-shadow-md border border rounded-lg border-slate-300" style="top: -68px">
@@ -49,7 +63,7 @@
             <a href="/" class="text-blue-600">Back</a>
         </div>
         <div class="w-full flex flex-col mt-8 rounded-3xl border border-slate-300 bg-white">
-            <form action="" method="post">
+            <form action="" method="post" enctype="multipart/form-data">
                 <div class="flex w-full justify-between items-center px-16 py-8">
                     <div class="text-left">
                         <h4 class="text-2xl">Change Info</h4>
@@ -61,7 +75,14 @@
 
                 <div class="flex gap-20 items-center px-16 py-8">
                     <label for="photo" class="w-20 h-20 relative rounded-md overflow-hidden cursor-pointer">
-                        <img src="./assets/images/blank-profile-picture-973460_1280.webp" class="brightness-50 hover:brightness-100" />
+                        <?php
+                        if ($photo) {
+                            $dataImg = base64_encode(stripslashes($photo));
+                            echo "<img src='data:image/jpg;base64,$dataImg' alt=''  class='brightness-50 hover:brightness-100 object-cover h-full'>";
+                        } else {
+                            echo "<img src='./../assets/images/blank-profile-picture-973460_1280.webp' alt=''  class='brightness-50 hover:brightness-100 object-cover'>";
+                        }
+                        ?>
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="white" class="absolute inset-0 m-auto" viewBox="0 0 16 16">
                             <path d="M10.5 8.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
                             <path d="M2 4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1.172a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 9.172 2H6.828a2 2 0 0 0-1.414.586l-.828.828A2 2 0 0 1 3.172 4H2zm.5 2a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1zm9 2.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0z" />
