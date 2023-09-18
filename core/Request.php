@@ -41,19 +41,23 @@ class Request
         }
 
         if ($this->method() === "post") {
-            if ($_FILES["photo"]) {
+
+            $photo = $_FILES["photo"]["name"] === "" ? null : $_FILES["photo"];
+   
+            if ($photo) {
                 $imagen_blob = addslashes(file_get_contents($_FILES["photo"]["tmp_name"])) ?? null;
             }
-
 
             foreach ($_POST as $key => $value) {
                 $body[$key] = filter_input(INPUT_POST, $key, FILTER_SANITIZE_SPECIAL_CHARS);
             }
 
-            if ($imagen_blob) {
+            $imagen = $imagen_blob ?? null;
+            if ($imagen) {
                 $body["photo"] = $imagen_blob;
             }
         }
+
         return $body;
     }
 }

@@ -27,7 +27,10 @@ class Edit extends UserModel
 
     public function updated($id)
     {
-        $this->password = password_hash($this->password, PASSWORD_DEFAULT);
+        $password = $this->password;
+        if($password) {
+            $this->password = password_hash($this->password, PASSWORD_DEFAULT);
+        }
         return parent::updated($id);
     }
 
