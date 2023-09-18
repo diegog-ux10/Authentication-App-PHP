@@ -7,7 +7,7 @@ foreach($model as $key => $value) {
 } 
 ?>
 
-<div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+<div class="flex h-screen flex-col justify-center px-6 py-12 lg:px-8">
     <div class="border-solid border-2 border-#DBDBDB p-16 max-w-lg mx-auto rounded-3xl">
         <form action="" method="post" novalidate>
 
@@ -45,8 +45,8 @@ foreach($model as $key => $value) {
                     </span>
                 </div>
                 
-                <div>
-                    <button type="submit" class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Start coding now</button>
+                <div class="mt-4">
+                    <button type="submit" class="flex w-full justify-center rounded-md bg-blue-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-blue-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Start coding now</button>
                 </div>
             </form>
             <p class="mt-10 text-center text-sm text-gray-500">

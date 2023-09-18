@@ -25,7 +25,6 @@ class Login extends Model
             $this->addError("email", "User does not exists with this email address");
             return false;
         }
-        echo password_verify($this->password, $user->password);
         if(!password_verify($this->password, $user->password)) {
             $this->addError("password", "Password is incorrect");
             return false;

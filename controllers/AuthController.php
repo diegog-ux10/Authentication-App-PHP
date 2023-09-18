@@ -24,7 +24,6 @@ class AuthController extends Controller
         if ($request->isPost()) {
             $loginForm->loadData($request->getBody());
             if ($loginForm->validate() && $loginForm->login()) {
-                echo "entre 3";
                 $response->redirect("/");
             }
         }
@@ -39,6 +38,7 @@ class AuthController extends Controller
         $user = new User();
 
         if ($request->isPost()) {
+            
             $user->loadData($request->getBody());
             if ($user->validate() && $user->save()) {
                 Application::$app->session->setFlash("success", "Register successful");

@@ -68,12 +68,9 @@ class Application
     public function login(DbModel $user)
     {
         $this->user = $user;
-
         $primaryKey = $user->primaryKey();
         $primaryValue = $user->{$primaryKey};
-
         $this->session->set("user", $primaryValue);
-    var_dump($_SESSION);
 
         return true;
     }

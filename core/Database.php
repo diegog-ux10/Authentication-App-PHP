@@ -69,4 +69,18 @@ class Database
     public function  log($message) {
         echo '['.date('Y-m-d H:i:s'). '] - '.$message.PHP_EOL; 
     }
+
+    public function getUserData(string $userId) 
+    {
+        $statement = $this->pdo->prepare("SELECT * FROM users WHERE id = $userId");
+        $statement->execute();
+ 
+       return $statement->fetch();
+   
+    }
+
+    public function updateUser(string $userId, string $sql)
+    {
+        $statement = $this->pdo->prepare("SELECT * FROM users WHERE id = $userId");
+    }
 }

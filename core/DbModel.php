@@ -23,6 +23,29 @@ abstract class DbModel extends Model
         return true;
     }
 
+    public  function updated($id) 
+    {
+        $tableName = $this->tableName();
+        $attributes = $this->attributes();
+        $attributesToUpdate = [];
+        foreach ($attributes as $attribute) {
+            if($this->{$attribute}) {
+                $attributesToUpdate[] = $attribute;
+            }
+        }
+        $params = [];
+        foreach($attributesToUpdate as $attr) {
+            $params[] = "$attr" . "=" . ":$attr";
+        }
+        $statement = self::prepare("UPDATE $tableName SET ". implode(',', $params) ." WHERE id = $id");
+        foreach($attributesToUpdate as $attribute) {
+
+            $statement->bindValue(":$attribute", $this->{$attribute});
+        }
+        $statement->execute();
+        return true;
+    }
+
     public static function findOne($where) 
     {
         $tableName = "users";

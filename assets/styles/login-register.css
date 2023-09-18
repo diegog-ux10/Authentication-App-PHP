@@ -17,3 +17,7 @@ input#password, input#passwordConfirm {
     background-size: 25px;
     padding-left: 45px;
 }
+
+#dropdown-menu.hide-toggle {
+    display: none !important;
+}

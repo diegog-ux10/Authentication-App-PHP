@@ -2,15 +2,16 @@
 
 namespace core;
 
-class Request {
+class Request
+{
     public function getPath()
     {
         $path =  $_SERVER["REQUEST_URI"] ?? "/";
         $position = strpos($path, "?");
-        if($position === false) {
+        if ($position === false) {
             return $path;
         }
-        return substr($path, 0, $position);   
+        return substr($path, 0, $position);
     }
 
     public function method()
@@ -18,24 +19,39 @@ class Request {
         return strtolower($_SERVER["REQUEST_METHOD"]);
     }
 
-    public function isPost() {
+    public function isPost()
+    {
         return $this->method() === "post";
     }
 
-    public function isGet() {
+    public function isGet()
+    {
         return $this->method() === "get";
     }
 
-    public function getBody() {
+    public function getBody()
+    {
+
         $body = [];
-        if($this->method() === "get") {
+
+        if ($this->method() === "get") {
             foreach ($_GET as $key => $value) {
                 $body[$key] = filter_input(INPUT_GET, $key, FILTER_SANITIZE_SPECIAL_CHARS);
             }
         }
-        if($this->method() === "post") {
+
+        if ($this->method() === "post") {
+            if ($_FILES["photo"]) {
+                $imagen_blob = addslashes(file_get_contents($_FILES["photo"]["tmp_name"])) ?? null;
+            }
+
+
             foreach ($_POST as $key => $value) {
                 $body[$key] = filter_input(INPUT_POST, $key, FILTER_SANITIZE_SPECIAL_CHARS);
+            }
+
+            if ($imagen_blob) {
+                $body["photo"] = $imagen_blob;
             }
         }
         return $body;

@@ -1,9 +1,3 @@
-<?php
-
-use core\Application;
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,11 +10,6 @@ use core\Application;
 </head>
 
 <body>
-    <?php if (Application::$app->session->getFlash("success")) : ?>
-        <div class="bg-blue-100 border-t border-b border-blue-500 text-blue-700 px-4 py-3" role="alert">
-            <p class="bg-blue-100 border-t border-b border-blue-500 text-blue-700 px-4 py-3" role="alert"><?php echo Application::$app->session->getFlash("success") ?></p>
-        </div>
-    <?php endif ?>
     {{content}}
 </body>
 

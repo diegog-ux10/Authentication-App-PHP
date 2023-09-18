@@ -11,6 +11,9 @@ $app = new Application($_SERVER["DOCUMENT_ROOT"], $config);
 
 $app->router->get("/", [SiteController::class, "profile"]);
 
+$app->router->get("/edit", [SiteController::class, "edit"]);
+$app->router->post("/edit", [SiteController::class, "edit"]);
+
 $app->router->get("/register", [AuthController::class, "register"]);
 $app->router->post("/register", [AuthController::class, "register"]);
 

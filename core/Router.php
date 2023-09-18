@@ -44,12 +44,10 @@ class Router
             /**
              * @var \core\Controller $controller
              */
-
             $controller = new $callback[0]();
             Application::$app->controller = $controller;
             $controller->action = $callback[1];
             $callback[0] = $controller;
-            
             foreach ($controller->getMiddleware() as $middleware) {
                 $middleware->execute();
             }
