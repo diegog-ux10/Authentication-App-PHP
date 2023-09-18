@@ -1,12 +1,25 @@
 <?php
 
-require_once($_SERVER["DOCUMENT_ROOT"] . "/core/Application.php");
+require_once "autoload.php";
+require_once __DIR__ . "/config/config.php";
 
-use app\core\Application;
+use controllers\AuthController;
+use controllers\SiteController;
+use core\Application;
 
-$app = new Application($_SERVER["DOCUMENT_ROOT"]);
+$app = new Application($_SERVER["DOCUMENT_ROOT"], $config);
 
-$app->router->get("/", "login");
-$app->router->get("/register", "register");
+$app->router->get("/", [SiteController::class, "profile"]);
+
+$app->router->get("/edit", [SiteController::class, "edit"]);
+$app->router->post("/edit", [SiteController::class, "edit"]);
+
+$app->router->get("/register", [AuthController::class, "register"]);
+$app->router->post("/register", [AuthController::class, "register"]);
+
+$app->router->get("/login", [AuthController::class, "login"]);
+$app->router->post("/login", [AuthController::class, "login"]);
+
+$app->router->get("/logout", [AuthController::class, "logout"]);
 
 $app->run();

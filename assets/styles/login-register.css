@@ -1,0 +1,23 @@
+.social-icons_container img {
+    cursor: pointer;
+}
+
+input#email {
+    background: url(/assets/images/email-input-icon.png);
+    background-repeat: no-repeat;
+    background-position: 10px center;
+    background-size: 30px;
+    padding-left: 45px;
+}
+
+input#password, input#passwordConfirm {
+    background: url(/assets/images/password-input-icon.png);
+    background-repeat: no-repeat;
+    background-position: 10px center;
+    background-size: 25px;
+    padding-left: 45px;
+}
+
+#dropdown-menu.hide-toggle {
+    display: none !important;
+}
