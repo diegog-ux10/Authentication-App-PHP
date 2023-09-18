@@ -14,7 +14,8 @@ use models\User;
 class AuthController extends Controller
 {
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->registerMiddleware(new AuthMiddlewares(["profile"]));
     }
 
@@ -38,11 +39,11 @@ class AuthController extends Controller
         $user = new User();
 
         if ($request->isPost()) {
-            
+
             $user->loadData($request->getBody());
             if ($user->validate() && $user->save()) {
                 Application::$app->session->setFlash("success", "Register successful");
-                Application::$app->response->redirect("/");
+                Application::$app->response->redirect("/login");
             }
             $this->setLayout("auth");
             return $this->render("register", [

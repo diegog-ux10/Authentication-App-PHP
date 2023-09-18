@@ -68,7 +68,7 @@ foreach ($user as $key => $value) {
                     <h4 class="text-slate-300">PHOTO</h4>
                 </div>
                 <?php
-                if(true) {
+                if (true) {
                     $dataImg = base64_encode(stripslashes($photo));
                     echo "<img src='data:image/jpg;base64,$dataImg' alt='' height='72' width='72' class='rounded'>";
                 } else {
